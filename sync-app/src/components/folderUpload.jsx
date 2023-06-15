@@ -1,39 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-const FolderUploader = () => {
-  const handleUpload = async (event) => {
-    event.preventDefault();
+function FileUploadForm2() {
+  const API_EndPoint = "http://localhost:9000/upload";
+  const [status, setStatus] = useState("");
+  const [message, setMessage] = useState("");
 
-    const folderInput = event.target.files[0];
+  const handleFileChange = (event) => {
+    const files = event.target.files;
     const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append(files[i].name, files[i]);
+    }
+    sendFiles(formData);
+  };
 
-    // Append the folder input to the form data
-    formData.append("folder", folderInput);
-
+  const sendFiles = async (formData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:9000/upload",
-        formData
-      );
-      console.log("Folder uploaded successfully");
-      console.log("Response:", response.data);
+      const response = await axios.post(API_EndPoint, formData);
+      const { status, message } = response.data;
+      setStatus(status);
+      setMessage(message);
+      console.log(response.data);
     } catch (error) {
-      console.error("Error uploading folder:", error);
+      console.error(error);
     }
   };
 
   return (
     <div>
-      <h3>Select a Folder to Upload:</h3>
-      <input
-        type="file"
-        webkitdirectory=""
-        onChange={handleUpload}
-        id="folder-input"
-      />
+      <h1>React File Uploader</h1>
+      <form>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          accept="image/*"
+          multiple
+        />
+        <button>Upload</button>
+      </form>
+      <h2>Status: {status}</h2>
+      <h3>{message}</h3>
     </div>
   );
-};
+}
 
-export default FolderUploader;
+export default FileUploadForm2;

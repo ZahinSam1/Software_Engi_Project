@@ -1,16 +1,17 @@
 import "./App.css";
-import TestForm from "./components/form";
-import FolderInput from "./components/folderInput";
-import FolderUploader from "./components/folderUpload";
+import FileUploadForm from "./components/uploadFile";
+import DataDisplay from "./components/displayData";
+import RegisterForm from "./components/registerData";
+import LoginForm from "./components/login";
 
 const App = () => {
   return (
     <div>
       <h1>This is App component</h1>
-      {/* <Fetch_API /> */}
-      {/* <TestForm /> */}
-      {/* <FolderInput /> */}
-      <FolderUploader />
+
+      {/* <FileUploadForm />
+      <DataDisplay /> */}
+      <RegisterForm />
     </div>
   );
 };
