@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +23,7 @@ const RegisterForm = () => {
       .then((response) => {
         // Handle successful registration
         console.log("Registration successful", response.data);
-        setValid(true)
+        setValid(true);
       })
       .catch((error) => {
         // Handle registration error
@@ -37,8 +36,48 @@ const RegisterForm = () => {
     setEmail("");
   };
 
-  return 
-    
+  return (
+    <div>
+      <form action="post" className="regFrom" onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="NameInput">Enter Username</label>
+          <input
+            type="text"
+            name="NameInput"
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="EmailInput">Enter Email</label>
+          <input
+            type="text"
+            name="EmailInput"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="passwordInput">Enter Password</label>
+          <input
+            type="password"
+            name="passwordInput"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="passwordInputAgain">Enter Password again</label>
+          <input type="password" name="passwordInputAgain" />
+        </div>
+        <button>Submit</button>
+      </form>
+    </div>
+  );
 };
 
 export default RegisterForm;
