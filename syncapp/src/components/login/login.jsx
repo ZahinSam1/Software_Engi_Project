@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css"; // Import the CSS file
 import axios from "axios";
 
@@ -7,13 +7,14 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [valid, setValid] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // Send login request to backend
-      const response = await axios.post("/login", { username, password });
+      const response = await axios.post("http://localhost:9000/login", { username, password });
       console.log("Login response:", response.data);
 
       // Reset form fields
@@ -52,7 +53,7 @@ const Login = () => {
         {/* <button className="login-nav-button" onClick={handleLogin}>
           Login
         </button> */}
-        <Link to={valid ? "/dashboard" : "/login"}>
+        <Link >
           <button className="login-nav-button">Login</button>
         </Link>
       </div>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./signup.css"; // Import the CSS file
 import axios from "axios";
 
@@ -8,24 +8,24 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [valid, setValid] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Perform registration logic here, e.g., send registration request to backend
     const userData = {
-      username,
-      password,
-      email,
+      username: username,
+      password: password,
+      email: email,
     };
-
     // Send registration request to backend API
     axios
       .post("http://localhost:9000/register", userData)
       .then((response) => {
         // Handle successful registration
-        console.log("Registration successful", response.data);
-        setValid(true)
+        console.log("Registration successful", response.data.message);
+        setValid(true);
       })
       .catch((error) => {
         // Handle registration error
@@ -33,15 +33,25 @@ const Signup = () => {
       });
 
     // Reset form fields
-    setUsername("");
-    setPassword("");
-    setEmail("");
+    // setUsername("");
+    // setPassword("");
+    // setEmail("");
   };
+
+  useEffect(() => {
+    if (valid) {
+      const timer = setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [valid]);
 
   return (
     <div className="signup-container">
       <h2>Register</h2>
-      <form onSubmit={handleSubmit} className="signup-form">
+      <form onSubmit={handleSubmit} className="signup-form" method="post">
         <div>
           <label htmlFor="username">Username:</label>
           <input
@@ -60,7 +70,6 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="signup-input"
-
           />
         </div>
         <div>
@@ -71,10 +80,13 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="signup-input"
-
           />
         </div>
-        <button className="signup-buttons" type="submit" link={ valid ? "/login" : "/signup" }>Register</button>
+        <button
+          className="signup-buttons"
+        >
+          Register
+        </button>
       </form>
     </div>
   );
