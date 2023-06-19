@@ -31,6 +31,8 @@ const Frontpage = () => {
   }, []);
 
   return (
+    <>
+    <div className="background-container"></div>
     <div className="frontpage-container">
       <header>
         <h1 className="frontpage-heading">SyncBridge</h1>
@@ -39,26 +41,31 @@ const Frontpage = () => {
           <ul>
             <li>
               <a className="about-link" href="#">
-                About
+                <h4>About</h4>
               </a>
             </li>
 
             <li>
               <a a className="services-link" href="#">
-                Services
+                <h4>Services</h4>
               </a>
             </li>
             <li>
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup">
+                <h4>Sign Up</h4>
+              </Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login">
+                <h4>Login</h4>
+              </Link>
             </li>
           </ul>
         </nav>
       </header>
 
       <section className="section-about">
+        <div className="section-background">
         <h2>About Us</h2>
         <p>
           Introducing SyncBridge - Seamless Data Synchronization Across
@@ -110,6 +117,7 @@ const Frontpage = () => {
           today and unlock the true potential of effortless data synchronization
           across platforms.
         </p>
+        </div>
       </section>
 
       <section className="section-services">
@@ -189,6 +197,7 @@ const Frontpage = () => {
         <p>&copy; 2023 My Website. All rights reserved.</p>
       </footer>
     </div>
+    </>
   );
 };
 
