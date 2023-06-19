@@ -1,0 +1,70 @@
+.vertical-nav {
+  background: linear-gradient(to bottom, #2b2c4fd1, #535c93, #202242);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 100;
+}
+
+.vertical-nav ul {
+  margin: 0;
+  padding: 25%;
+}
+
+.vertical-nav li {
+  display: block;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.vertical-nav li a {
+  font-size: 30px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.vertical-nav li a:hover {
+  background-color: #0093A9;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* .dashboard-title {
+  width: 100%;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  top: 20px;
+  color: #beb9d0;
+} */
+
+.dashboard-description {
+  margin-top: 15px;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  color: #0093A9;
+}
+
+.dashboard-button {
+  margin-left: 25%;
+  align-items: center;
+  width: 100px;
+  padding: 10px;
+  background-color: #EB806C ;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.dashboard-button:hover {
+  background-color: #B65975; /* Update the background color on hover */
+}
+

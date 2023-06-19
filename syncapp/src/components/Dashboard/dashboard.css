@@ -1,0 +1,194 @@
+/* Default styles */
+body {
+  background: #aeaabc9a;
+}
+/* .container {
+      color: #F9F8FF;
+
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100vw;
+}
+.stat {
+
+  position: relative;
+ 
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+
+  padding: 20px;
+}
+.StatisticsBar {
+  background-color: #fbf7ff;
+  border-radius: 20px;
+  width: 50vh;
+
+  position: relative;
+
+  flex-grow: 2;
+}
+
+.StatisticsLine {
+  background-color: #fbf7ff;
+  border-radius: 20px;
+
+  position: relative;
+  width: 48vh;
+  flex-grow: 5;
+}
+
+.StatisticsPie {
+  background-color: #fbf7ff;
+  border-radius: 20px;
+  width: 40vh;
+  position: relative;
+
+  flex-shrink: -3;
+ 
+} */
+.container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100vw;
+}
+
+.stat {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  margin-left: 195px;
+  margin-top: 90px;
+}
+
+.stat > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 10px;
+  font-size: 30px;
+}
+
+.StatisticsBar {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 300px;
+  height: 170px;
+  position: relative;
+
+
+}
+
+.StatisticsLine {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 300px;
+  height: 170px;
+
+  position: relative;
+}
+
+.StatisticsPie {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 300px;
+  height: 250px;
+
+  position: relative;
+}
+
+.dashboard-title {
+  width: 100%;
+  font-size: 55px;
+  font-weight: bold;
+  text-align: left;
+  position: fixed;
+  color: #0000004b;
+  /* background: linear-gradient(to left, #2022420a, #535c937a, #2b2c4fd1); */
+  margin-top: 0;
+  margin-left: 220px;
+}
+
+
+.flex-container {
+  margin-left: 15%;
+  position: absolute;
+  display: flex;
+  /* background-color: DodgerBlue; */
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 10px;
+  font-size: 30px;
+}
+
+/* #24243e, #302b63, #0f0c29 */
+/* #000428 → #004e92 */
+/* #3a1c71 → #d76d77 → #ffaf7b */
+/* #c33764 → #1d2671 */
+/* #CCCCFF */
+/* Media queries for responsiveness */
+
+@media (max-width: 1024px) {
+  .StatisticsBar {
+    left: 50px;
+  }
+
+  .StatisticsLine {
+    left: 320px;
+  }
+
+  .StatisticsPie {
+    left: 580px;
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  .dashboard-title {
+    font-size: 20px;
+  }
+
+  .dashboard-description {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .dashboard-button {
+    width: 150px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 5px;
+  }
+
+  .dashboard-title {
+    font-size: 18px;
+  }
+
+  .dashboard-description {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  .dashboard-button {
+    width: 120px;
+    font-size: 12px;
+  }
+}
