@@ -51,9 +51,8 @@
 //   //       email: "farasha@gmail.com",
 //   //       age: "22",
 //   //     },
-      
-//   // ];
 
+//   // ];
 
 //   // const customStyles = {
 //   //   rows: {
@@ -69,14 +68,14 @@
 //   return (
 //     <div className="connected">
 //       {/* <DataTable className="datatable"
-//       columns={columns} 
+//       columns={columns}
 //       data={data}
 //       selectableRows
 //      fixedHeader
 //     //  pagination
 //     customStyles={customStyles}
 //       ></DataTable> */}
-      
+
 //       <div>
 //         <h1>Names</h1>
 //       </div>
@@ -93,49 +92,65 @@
 //       </div>
 //     </div>
 //   );
-  
+
 // };
 
 // export default Connected;
 // // email and deviuce connected map method
 // // .map function usage in javascript
 
-import React from "react";
+import { useState } from "react";
 import "./connected.css"; // Import the CSS file
 import DataTable from "react-data-table-component";
 import axios from "axios";
 
 const Connected = () => {
+  const { data, setData } = useState([]);
+  const { error, setError } = useState(null);
   const columns = [
     {
       name: "Name",
       selector: (row) => row.name,
-      sortable: true
+      sortable: true,
     },
     {
       name: "Email",
       selector: (row) => row.email,
-      sortable: true
+      sortable: true,
     },
     {
       name: "Age",
       selector: (row) => row.age,
-      sortable: true
+      sortable: true,
     },
   ];
 
   const fetchData = () => {
-    const response = axios.get("https://127.0.0.1:9000/upload");
-    const data = response.data;
-    return data;
+    try {
+      axios
+        .get("https://127.0.0.1:9000/upload")
+        .then((response) => {
+          console.log(response.data);
+        })
+        .then((error) => {
+          console.log(error);
+          setError("no data found");
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const data = fetchData();
-
+  if (error) {
+    return (
+      <div>{error}</div>
+    )
+  }
   return (
     <div className="connected">
-      <DataTable className="datatable"
-        columns={columns} 
+      <DataTable
+        className="datatable"
+        columns={columns}
         data={data}
         selectableRows
         fixedHeader
@@ -147,4 +162,3 @@ const Connected = () => {
 };
 
 export default Connected;
-

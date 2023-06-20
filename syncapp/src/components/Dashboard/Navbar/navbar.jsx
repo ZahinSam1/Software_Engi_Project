@@ -1,30 +1,25 @@
-import React from "react";
+import { useState } from "react";
 import "./navbar.css"; // Import the CSS file
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ onFilesClick, onSettingsClick, onHomeClick }) => {
   return (
     <div className="vertical-nav">
       <div>
-        <p className="dashboard-description">
-          SyncApp
-        </p>
-        <Link to="/">
-          <button className="dashboard-button">HOME</button>
-        </Link>
+        <p className="dashboard-description">SyncApp</p>
       </div>
       <ul>
         <li>
-          <a href="#">Home</a>
+          <button onClick={onHomeClick}>Home</button>
         </li>
         <li>
-          <a href="#">Files</a>
+          <button onClick={onFilesClick}>Files</button>
         </li>
         <li>
-          <a href="#">Settings</a>
+          <button onClick={onSettingsClick}>Settings</button>
         </li>
         <li>
-          <a href="#">Logout</a>
+          <button>Logout</button>
         </li>
       </ul>
     </div>
