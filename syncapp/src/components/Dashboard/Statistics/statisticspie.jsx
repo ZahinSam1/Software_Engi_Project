@@ -1,14 +1,44 @@
-import React, { Component } from "react";
-import { Doughnut } from "react-chartjs-2";
+import React from "react";
+import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
-import "../dashboard.css"; // Import the CSS file
 
 
-const StatisticsPie = ({ chartData }) => {
+const StatisticsPie = () => {
+  const chartData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [
+      {
+        id: 1,
+        year: 2016,
+        label: "User Gain",
+        data: [800, 400, 600, 300, 800, 900],
+        backgroundColor: [
+          "#131352",
+          "#E97156",
+          "#0060A1",
+          "#008493",
+          "#B83B61",
+          "#0090BE",
+        ],
+        
+      },
+
+      // Add more datasets as needed
+    ],
+  };
+  const chartOptions = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+
   return (
     <div className="StatisticsPie"
     >
-      <Doughnut data={chartData} />
+      <Pie data={chartData} options={chartOptions} />
     </div>
   );
 };

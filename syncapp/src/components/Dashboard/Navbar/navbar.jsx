@@ -10,16 +10,16 @@ const Navbar = ({ onFilesClick, onSettingsClick, onHomeClick }) => {
       </div>
       <ul>
         <li>
-          <button onClick={onHomeClick}>Home</button>
+          <button onClick={onHomeClick} className="navbar-button">Home</button>
         </li>
         <li>
-          <button onClick={onFilesClick}>Files</button>
+          <button onClick={onFilesClick} className="navbar-button">Files</button>
         </li>
         <li>
-          <button onClick={onSettingsClick}>Settings</button>
+          <button onClick={onSettingsClick} className="navbar-button">Settings</button>
         </li>
         <li>
-          <button>Logout</button>
+          <button className="navbar-button">Logout</button>
         </li>
       </ul>
     </div>
