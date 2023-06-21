@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-// const uri = "mongodb+srv://ZahinSam:Raiden17%21@studytest.aazmrxi.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://ZahinSam:Raiden17%21@studytest.aazmrxi.mongodb.net/?retryWrites=true&w=majority";
 
 // this can be used in multiple cases
 // can be localhhost or web server
-const uri = "mongodb://127.0.0.1:27017/test";
+// const uri = "mongodb://127.0.0.1:27017/test";
 // const uri = "mongodb://localhost:27017/test";
 
 // this function is used to connect to the database
