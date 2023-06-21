@@ -1,6 +1,4 @@
-import { useState } from "react";
 import "./navbar.css"; // Import the CSS file
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 const Navbar = ({ onFilesClick, onSettingsClick, onHomeClick }) => {
   return (
@@ -15,9 +13,7 @@ const Navbar = ({ onFilesClick, onSettingsClick, onHomeClick }) => {
         <li>
           <button onClick={onFilesClick} className="navbar-button">Files</button>
         </li>
-        <li>
-          <button onClick={onSettingsClick} className="navbar-button">Settings</button>
-        </li>
+        
         <li>
           <button className="navbar-button">Logout</button>
         </li>

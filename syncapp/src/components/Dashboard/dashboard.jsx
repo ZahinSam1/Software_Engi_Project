@@ -3,11 +3,12 @@ import Navbar from "./Navbar/navbar";
 import StatisticsBar from "./Statistics/statisticsbar";
 import StatisticsLine from "./Statistics/statisticsline";
 import StatisticsPie from "./Statistics/statisticspie";
-import SyncUpdate from "./Update/update";
-import Connected from "./Connected/connected";
-import SettingsComponent from "./settings/settings";
+import StatisticsDoughnut from "./Statistics/statisticsdoughnut";
 import Files from "./Files/Files";
 import "./dashboard.css"; // Import the CSS file
+import StatisticsBubble from "./Statistics/statisticsbubble";
+import StatisticsRadar from "./Statistics/statisticsradar";
+import StatisticsScatter from "./Statistics/statisticsscatter";
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("home");
@@ -37,19 +38,16 @@ const Dashboard = () => {
         <>
           <div className="stat">
             <StatisticsBar/>
-            <StatisticsLine/>
             <StatisticsPie/>
+            {/* <StatisticsBubble/> */}
+            <StatisticsRadar/>
+            <StatisticsDoughnut/>
+            <StatisticsLine/>
           </div>
-          <div className="sync">
-            <SyncUpdate />
-          </div>
-          <div className="connected">
-            <Connected />
-          </div>
+          
         </>
       )}
       {activeComponent === "files" && <Files />}
-      {activeComponent === "settings" && <SettingsComponent />}
     </div>
   );
 };

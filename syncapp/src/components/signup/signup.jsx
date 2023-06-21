@@ -1,64 +1,71 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./signup.css"; // Import the CSS file
+import { useNavigate } from "react-router-dom";
+import "./signup.css";
 import axios from "axios";
 
 const Signup = () => {
   const [processing, setProcessing] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [valid, setValid] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); // New state for the popup
+  const [showPopup, setShowPopup] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if any field is empty
-    if (!username || !password || !email) {
-      setShowPopup(true); // Show the popup if any field is empty
+    if (!username || !password || !email || !confirmPassword) {
+      setStatusMsg("Please input credentials to proceed");
+      setShowPopup(true);
+      return;
+    }
+  
+    if (password !== confirmPassword) {
+      setStatusMsg("Passwords do not match");
+      setShowPopup(true);
       return;
     }
 
-    // Perform registration logic here, e.g., send registration request to backend
     const userData = {
       username: username,
       password: password,
       email: email,
     };
 
-    setProcessing(true);
-
-    // Send registration request to backend API
     axios
-      .post("http://localhost:9000/register", userData)
+      .post("http://ec2-13-53-129-97.eu-north-1.compute.amazonaws.com:9000/register", userData)
       .then((response) => {
-        // Handle successful registration
-        console.log("Registration successful", response.data.message);
-        // if (response.status !== 409) {
-        // }
-        setValid(true);
+        const message = response.data.message;
 
-      })
-      .then((error) => {
-        
-        // Handle registration error
-        if (error.response && error.response.status === 409) {
-          // Account already exists
-          console.log("Account already exists");
-          setValid(false); // Update valid state to false
+        console.log("Message:", message);
+        setProcessing(true);
+
+        if (message === "Registration successful") {
+          setStatusMsg(message);
+          setValid(true);
+        } else if (message === "Username already exists") {
+          setStatusMsg("The Username already exists");
+          setTimeout(() => {
+            setProcessing(false);
+          }, 2000);
+        } else if (message === "An error occurred") {
+          setStatusMsg("The registration failed");
+          setTimeout(() => {
+            setProcessing(false);
+          }, 2000);
         } else {
-          // Handle other registration errors
-          console.error("Registration failed", error);
+          setStatusMsg("Error Occured");
+          setTimeout(() => {
+            setProcessing(false);
+          }, 2000);
         }
-        
       })
-      // .finally(() => {
-      //   setTimeout(() => {
-      //     setProcessing(false);
-      //   }, 2000); // Add a delay of 2000 milliseconds (2 seconds)
-      // });
+      .catch((error) => {
+        setStatusMsg("An error occurred while registering");
+      });
   };
 
   useEffect(() => {
@@ -74,21 +81,12 @@ const Signup = () => {
   return (
     <>
       {processing ? (
-        <>
+        <div>
           <div className="blurred"> </div>
-          {valid === true ? (
-            <h1 className="successfully">You Have Successfully Registered</h1>
-          ) : (
-            <h1 className="successfully">Account Already Exists</h1>
-          )}
-          {/* {!valid && <h1 className="successfully">Account Already Exists</h1>} */}
-          {/* {valid && (
-            <h1 className="successfully">You Have Successfully Registered</h1>
-          )} */}
-        </>
-      ) : null}
-      <div className="signup-container">
-        {!processing && (
+          <h1 className="successfully">{statusMsg}</h1>
+        </div>
+      ) : (
+        <div className="signup-container">
           <div className="floating-div">
             <h2>Register</h2>
             <form onSubmit={handleSubmit} className="signup-form" method="post">
@@ -120,6 +118,19 @@ const Signup = () => {
               </div>
               <div className="form-group">
                 <input
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="signup-input"
+                  placeholder="Confirm Password"
+                />
+                <label htmlFor="confirmPassword" className="form-label">
+                  Confirm Password
+                </label>
+              </div>
+              <div className="form-group">
+                <input
                   type="email"
                   id="email"
                   value={email}
@@ -131,15 +142,15 @@ const Signup = () => {
                   Email
                 </label>
               </div>
-              <button className="signup-buttons">Register</button>
+              <button className="signup-nav-button">Register</button>
             </form>
           </div>
-        )}
-      </div>
-      {showPopup && (
-        <div className="popup">
-          <p>Please input credentials to proceed</p>
-          <button onClick={() => setShowPopup(false)}>Close</button>
+          {showPopup && (
+            <div className="popup">
+              <p>{statusMsg}</p>
+              <button onClick={() => setShowPopup(false)}>Close</button>
+            </div>
+          )}
         </div>
       )}
     </>

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../../UserContest";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css"; // Import the CSS file
 import axios from "axios";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const { userName, setuserName } = useContext(UserContext);
+  const [loginUsername, setLoginUsername] = useState("");
   const [password, setPassword] = useState("");
   const [valid, setValid] = useState(true); // Set initial validity as true
   const navigate = useNavigate();
@@ -12,24 +14,35 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Send login request to backend
-      const response = await axios.post("http://localhost:9000/login", { username, password });
-      console.log("Login response:", response.data);
+    // Send login request to backend
+    await axios
+      .post(
+        "http://ec2-13-53-129-97.eu-north-1.compute.amazonaws.com:9000/login",
+        { loginUsername, password }
+      )
+      .then((response) => {
+        console.log("login Response:", response.data.message);
+        setValid(true);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
-      // Reset form fields
-      setUsername("");
-      setPassword("");
-      setValid(true);
-
-      // Redirect to dashboard
-      navigate("/dashboard");
-
-    } catch (error) {
-      console.error("Login error:", error);
-      setValid(false); // Update validity to false
-    }
+    // Reset form fields
+    setLoginUsername("");
+    setPassword("");
   };
+  
+  useEffect(() => {
+    if (valid) {
+      const timer = setTimeout(() => {
+        navigate("/dashboard", { replace: true });
+        setuserName(loginUsername);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [valid]);
 
   return (
     <div className="login-container">
@@ -40,8 +53,8 @@ const Login = () => {
             type="text"
             placeholder="Username"
             className="login-input"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={loginUsername}
+            onChange={(e) => setLoginUsername(e.target.value)}
           />
           <input
             type="password"
@@ -50,9 +63,13 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {!valid && <p className="login-error">Incorrect username or password</p>}
+          {!valid && (
+            <p className="login-error">Incorrect username or password</p>
+          )}
           <div className="login-buttons">
-            <button type="submit" className="login-nav-button">Login</button>
+            <button type="submit" className="login-nav-button">
+              Login
+            </button>
             <Link to="/signup" className="back-button">
               <p>Dont have an account? Signup</p>
             </Link>

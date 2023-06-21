@@ -12,18 +12,19 @@ body {
   width: 100vw;
   height: 100vh;
   background: #e5fbff8d;
+  overflow-x: hidden;
 
 }
-
 .stat {
-  position: relative;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 20px;
-  margin-left: 250px;
+  margin-left: 200px;
   margin-top: 90px;
-  width: 100%;
-
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 }
 
 .stat > div {
@@ -31,35 +32,22 @@ body {
   margin: 10px;
   padding: 10px;
   font-size: 30px;
-  width: 100%;
+  width: 40%;
+  height: 40%;
 }
 
-.StatisticsBar {
+.StatisticsBar,
+.StatisticsLine,
+.StatisticsPie,
+.StatisticsDoughnut,
+.StatisticsBubble {
   background-color: #ffffff;
   border-radius: 20px;
-  width: 400px;
-  height: 200px;
-  position: relative;
-
-
-}
-
-.StatisticsLine {
-  background-color: #ffffff;
-  border-radius: 20px;
-  width: 400px;
+  width: 50%;
   height: 200px;
   position: relative;
 }
 
-.StatisticsPie {
-  background-color: #ffffff;
-  border-radius: 20px;
-  width: 400px;
-  height: 200px;
-
-  position: relative;
-}
 
 .dashboard-title {
   width: 100%;
