@@ -56,7 +56,6 @@ body {
   text-align: left;
   position: fixed;
   color: #0000004b;
-  /* background: linear-gradient(to left, #2022420a, #535c937a, #2b2c4fd1); */
   margin-top: 0;
   margin-left: 270px;
 }
@@ -82,59 +81,4 @@ body {
   margin-left: 400px;
   margin-top: -170px;
   height: 50%;
-}
-
-@media (max-width: 1024px) {
-  .StatisticsBar {
-    left: 50px;
-  }
-
-  .StatisticsLine {
-    left: 320px;
-  }
-
-  .StatisticsPie {
-    left: 580px;
-    width: 70%;
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 10px;
-  }
-
-  .dashboard-title {
-    font-size: 20px;
-  }
-
-  .dashboard-description {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-
-  .dashboard-button {
-    width: 150px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .dashboard-container {
-    padding: 5px;
-  }
-
-  .dashboard-title {
-    font-size: 18px;
-  }
-
-  .dashboard-description {
-    font-size: 12px;
-    margin-bottom: 5px;
-  }
-
-  .dashboard-button {
-    width: 120px;
-    font-size: 12px;
-  }
 }

@@ -6,9 +6,7 @@ import StatisticsPie from "./Statistics/statisticspie";
 import StatisticsDoughnut from "./Statistics/statisticsdoughnut";
 import Files from "./Files/Files";
 import "./dashboard.css"; // Import the CSS file
-import StatisticsBubble from "./Statistics/statisticsbubble";
-import StatisticsRadar from "./Statistics/statisticsradar";
-import StatisticsScatter from "./Statistics/statisticsscatter";
+
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("home");
@@ -25,10 +23,8 @@ const Dashboard = () => {
     setActiveComponent("home");
   };
 
- 
   return (
     <div className="container">
-      <h1 className="dashboard-title">DASHBOARD</h1>
       <Navbar
         onFilesClick={handleFilesClick}
         onSettingsClick={handleSettingsClick}
@@ -36,15 +32,14 @@ const Dashboard = () => {
       />
       {activeComponent === "home" && (
         <>
+          <h1 className="dashboard-title">DASHBOARD</h1>
+
           <div className="stat">
-            <StatisticsBar/>
-            <StatisticsPie/>
-            {/* <StatisticsBubble/> */}
-            <StatisticsRadar/>
-            <StatisticsDoughnut/>
-            <StatisticsLine/>
+            <StatisticsBar />
+            <StatisticsLine />
+            <StatisticsDoughnut />
+            <StatisticsPie />
           </div>
-          
         </>
       )}
       {activeComponent === "files" && <Files />}
