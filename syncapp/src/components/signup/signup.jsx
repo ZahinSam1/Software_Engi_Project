@@ -36,9 +36,13 @@ const Signup = () => {
       .then((response) => {
         // Handle successful registration
         console.log("Registration successful", response.data.message);
+        // if (response.status !== 409) {
+        // }
         setValid(true);
+
       })
-      .catch((error) => {
+      .then((error) => {
+        
         // Handle registration error
         if (error.response && error.response.status === 409) {
           // Account already exists
@@ -48,16 +52,13 @@ const Signup = () => {
           // Handle other registration errors
           console.error("Registration failed", error);
         }
+        
       })
-      .finally(() => {
-        setTimeout(() => {
-          setProcessing(false);
-        }, 2000); // Add a delay of 2000 milliseconds (2 seconds)
-      });
-    // Reset form fields
-    // setUsername("");
-    // setPassword("");
-    // setEmail("");
+      // .finally(() => {
+      //   setTimeout(() => {
+      //     setProcessing(false);
+      //   }, 2000); // Add a delay of 2000 milliseconds (2 seconds)
+      // });
   };
 
   useEffect(() => {
@@ -74,12 +75,16 @@ const Signup = () => {
     <>
       {processing ? (
         <>
-          <div className="blurred"></div>
-          {valid ? (
+          <div className="blurred"> </div>
+          {valid === true ? (
             <h1 className="successfully">You Have Successfully Registered</h1>
           ) : (
             <h1 className="successfully">Account Already Exists</h1>
           )}
+          {/* {!valid && <h1 className="successfully">Account Already Exists</h1>} */}
+          {/* {valid && (
+            <h1 className="successfully">You Have Successfully Registered</h1>
+          )} */}
         </>
       ) : null}
       <div className="signup-container">
@@ -139,7 +144,6 @@ const Signup = () => {
       )}
     </>
   );
-  
 };
 
 export default Signup;

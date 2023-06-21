@@ -6,7 +6,7 @@ import StatisticsPie from "./Statistics/statisticspie";
 import SyncUpdate from "./Update/update";
 import Connected from "./Connected/connected";
 import SettingsComponent from "./settings/settings";
-import Files from "./Files copy/Files";
+import Files from "./Files/Files";
 import "./dashboard.css"; // Import the CSS file
 
 const Dashboard = () => {
