@@ -1,38 +1,45 @@
-import React, { useState, useContext, useEffect } from "react";
-import UserContext from "../../UserContest";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css"; // Import the CSS file
 import axios from "axios";
+
+import UserContext from "../../UserContext";
 
 const Login = () => {
   const { userName, setuserName } = useContext(UserContext);
   const [loginUsername, setLoginUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [valid, setValid] = useState(true); // Set initial validity as true
+  const [valid, setValid] = useState(false); // Set initial validity as true
+  const [stat, setStat] = useState(false);
   const navigate = useNavigate();
+  const loginURL = "http://ec2-13-53-129-97.eu-north-1.compute.amazonaws.com:9000/login";
+  // const loginURL = "http://localhost:9000/login";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Send login request to backend
     await axios
-      .post(
-        "http://ec2-13-53-129-97.eu-north-1.compute.amazonaws.com:9000/login",
-        { loginUsername, password }
-      )
+      .post(loginURL, {
+        loginUsername,
+        password,
+      })
       .then((response) => {
         console.log("login Response:", response.data.message);
-        setValid(true);
+        const message = response.data.message;
+        if (message === "Invalid username or password") {
+          console.log("Invalid username or password");
+          setStat(true);
+        }
+        if (message === "Login successful") {
+          setValid(true);
+        }
       })
       .catch((err) => {
         console.error(err);
       });
-
-    // Reset form fields
-    setLoginUsername("");
-    setPassword("");
   };
-  
+
   useEffect(() => {
     if (valid) {
       const timer = setTimeout(() => {
@@ -42,13 +49,13 @@ const Login = () => {
 
       return () => clearTimeout(timer);
     }
-  }, [valid]);
+  }, [valid, setuserName]);
 
   return (
     <div className="login-container">
       <div className="floating-div">
         <h2 className="login-heading">Login</h2>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className="login-form">
           <input
             type="text"
             placeholder="Username"
@@ -63,11 +70,17 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {!valid && (
+          {!stat ? (
+            ""
+          ) : (
             <p className="login-error">Incorrect username or password</p>
           )}
           <div className="login-buttons">
-            <button type="submit" className="login-nav-button">
+            <button
+              type="submit"
+              className="login-nav-button"
+              onClick={handleSubmit}
+            >
               Login
             </button>
             <Link to="/signup" className="back-button">

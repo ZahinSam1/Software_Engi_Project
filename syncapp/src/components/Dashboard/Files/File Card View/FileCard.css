@@ -1,0 +1,138 @@
+.fileCard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(207, 210, 255, 0.242);
+  position: relative; /* Add position: relative */
+}
+
+.fileCard-container:hover {
+  border-color: rgb(0, 18, 82);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.621);
+}
+
+.fileCard-image {
+  width: 200px;
+  height: 200px;
+}
+.fileCard-image img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  user-select: none;
+}
+
+.file-details {
+  user-select: none;
+  background-color: rgba(162, 96, 96, 0);
+  display: none; /* Hide file details by default */
+  position: absolute; /* Add position: absolute */
+  top: 100px; /* Position at the top of the container */
+  left: 0; /* Position at the left of the container */
+  width: 90%; /* Occupy the full width of the container */
+  height: 45%; /* Occupy the full height of the container */
+  background-color: rgba(203, 206, 251, 0.578); /* Set the background color */
+  border-radius: 5px;
+  padding: 10px;
+  color: rgba(255, 255, 255, 0.765);
+}
+.fileCard-container:hover .file-details {
+  display: block; /* Show file details when hovering */
+}
+
+.fileCard-name {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: left;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fileCard-size {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.file-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.action-button,
+.delete-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: #eb4444;
+}
+.delete-button:hover {
+  background-color: #f06f2f;
+}
+
+.normal {
+  background-color: #ccc;
+}
+
+.action-button:hover {
+  background-color: #1a94c8;
+}
+
+.file-content-container {
+  z-index: 100;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  user-select: none;
+}
+
+.file-content-container img {
+  width: 500px;
+}
+
+.file-content-name p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(230, 222, 250, 0.479);
+  padding: 20px;
+  font-size: 35px;
+  font-weight: bold;
+  font: arial, helvetica;
+  border-radius: 20px;
+  color: #ffffff;
+}
+.file-content {
+  height: 500px;
+  width: 700px;
+  background: wheat;
+  margin: auto;
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: scroll;
+  white-space: pre-line;
+}
+
+.file-content::-webkit-scrollbar {
+  display: none;
+}
