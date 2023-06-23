@@ -1,0 +1,12 @@
+.Files {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background-color: rgba(255, 0, 0, 0);
+  margin-left: 280px;
+  width: calc(95% - 250px); /* Adjust the margin and width as needed */
+  overflow-x: hidden; /* Add this line to remove horizontal scroll */
+}
